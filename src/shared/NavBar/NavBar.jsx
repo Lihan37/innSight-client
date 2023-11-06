@@ -1,9 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
 import '../NavBar/navbar.css'
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const NavBar = () => {
 
     const location = useLocation();
+    const { user, logOut } = useContext(AuthContext);
+    const handleSignOut = () =>{
+      logOut()
+      .then()
+      .catch()
+  }
 
     const navItems = (
         <>
@@ -57,7 +65,17 @@ const NavBar = () => {
             </div>
 
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                {user ? (
+                    <div className="flex items-center">
+                        <img src={user.photoURL} alt="User Photo" className="w-8 h-8 rounded-full mr-2" />
+                        <span className="text-yellow-200 mr-2">{user.email}</span>
+                        <button onClick={handleSignOut} className='btn'>Sign Out</button>
+                    </div>
+                ) : (
+                    <Link to='/login'>
+                        <button className='btn'>Login</button>
+                    </Link>
+                )}
             </div>
         </div>
     );
