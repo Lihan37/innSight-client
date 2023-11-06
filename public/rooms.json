@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "roomType": "Deluxe Double Room",
+        "image": "https://i.ibb.co/dDDk7Q6/double-bed-with-cushions.jpg"
+    },
+    {
+        "id": 2,
+        "roomType": "Standard Twin Room",
+        "image": "https://i.ibb.co/jVdsJh3/steven-ungermann-w-E7q-Dv11kio-unsplash.jpg"
+    },
+    {
+        "id": 3,
+        "roomType": "Suite with Ocean View",
+        "image": "https://i.ibb.co/jhSyz8j/2150683421.jpg"
+    },
+    {
+        "id": 4,
+        "roomType": "Family Suite",
+        "image": "https://i.ibb.co/k8dBmVD/istockphoto-1442607457-1024x1024.jpg"
+    },
+    {
+        "id": 5,
+        "roomType": "Single Room",
+        "image": "https://i.ibb.co/1rZXD8x/steven-ungermann-a-RT5-UCf2-MYY-unsplash.jpg"
+    },
+    {
+        "id": 6,
+        "roomType": "Luxury Villa",
+        "image": "https://i.ibb.co/fQZxmd1/zac-gudakov-zt-Wpw-TEx728-unsplash.jpg"
+    }
+]
