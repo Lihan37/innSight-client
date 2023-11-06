@@ -39,6 +39,14 @@ const NavBar = () => {
               My Bookings
             </Link>
           </li>
+          <li>
+            <Link
+              to='/signUp'
+              className={`hover:text-white ${location.pathname === '/signUp' ? 'bg-active' : ''}`}
+            >
+              Sign Up
+            </Link>
+          </li>
         </>
       );
       

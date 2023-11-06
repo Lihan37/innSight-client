@@ -50,9 +50,9 @@ const SignUp = () => {
     }
     return (
         <div className="hero min-h-screen ">
-            <div className="hero-content flex-col lg:flex-row-reverse">
+            <div className="hero-content  flex-col lg:flex-row-reverse">
 
-                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <div className="card bg-orange-300 flex-shrink-0 w-full max-w-sm shadow-2xl ">
                     <h2 className="text-center items-center text-3xl mt-6 font-semibold">Sign Up!!</h2>
                     <form onSubmit={handleSignUp} className="card-body">
                         <div className="form-control">
