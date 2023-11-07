@@ -1,8 +1,9 @@
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Room = ({ room }) => {
-  const { id, roomType, image, price } = room;
+  const { _id, id, roomType, image, price } = room;
 
   return (
     <div className="mb-5">
@@ -15,9 +16,11 @@ const Room = ({ room }) => {
           <p className="text-blue-300 text-lg">Price: ${price}</p>
           <p className="text-blue-300 text-lg">Total Reviews:</p>
           <div className="card-actions justify-end">
-            <button className="btn bg-purple-900 text-yellow-200 hover:text-gray-600">
-              Show Details <FaArrowRight />
-            </button>
+            <Link to={`/checkout/${_id}`}>
+              <button className="btn bg-purple-900 text-yellow-200 hover:text-gray-600">
+                Show Details <FaArrowRight />
+              </button>
+            </Link>
           </div>
         </div>
       </div>
