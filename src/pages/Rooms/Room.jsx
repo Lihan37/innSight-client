@@ -16,7 +16,7 @@ const Room = ({ room }) => {
           <p className="text-blue-300 text-lg">Price: ${price}</p>
           <p className="text-blue-300 text-lg">Total Reviews:</p>
           <div className="card-actions justify-end">
-            <Link to={`/checkout/${_id}`}>
+            <Link to={`/roomDetails/${_id}`}>
               <button className="btn bg-purple-900 text-yellow-200 hover:text-gray-600">
                 Show Details <FaArrowRight />
               </button>
