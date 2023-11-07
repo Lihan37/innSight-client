@@ -44,6 +44,7 @@ const RoomDetails = () => {
             customerName: name,
             email,
             date,
+            image: image,
             service: roomType,
             service_id: _id,
             price: price
