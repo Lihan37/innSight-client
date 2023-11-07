@@ -74,14 +74,14 @@ const NavBar = () => {
 
             <div className="navbar-end">
                 {user ? (
-                    <>
-                    <li><Link to="/bookings">My Bookings</Link></li>
+                    
+                    
                     <div className="flex items-center">
                         <img src={user.photoURL} alt="User Photo" className="w-8 h-8 rounded-full mr-2" />
                         <span className="text-yellow-200 mr-2">{user.email}</span>
                         <button onClick={handleSignOut} className='btn'>Sign Out</button>
                     </div>
-                    </>
+                    
                 ) : (
                     <Link to='/login'>
                         <button className='btn'>Login</button>
