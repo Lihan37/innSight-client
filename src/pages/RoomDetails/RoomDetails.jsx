@@ -1,10 +1,14 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../../providers/AuthProvider";
+import SweetAlert from "react-bootstrap-sweetalert";
 
 const RoomDetails = () => {
+
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
     const roomDetail = useLoaderData();
     const {
         _id,
@@ -40,12 +44,28 @@ const RoomDetails = () => {
             customerName: name,
             email,
             date,
-            service: _id,
+            service: roomType,
+            service_id: _id,
             price: price
         }
 
         console.log(booking);
-    };
+
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    setShowSuccessAlert(true);
+                }
+            })
+    }
 
     return (
         <div className="mx-auto p-6 sm:p-12 lg:p-16 rounded-lg shadow-md">
@@ -159,6 +179,12 @@ const RoomDetails = () => {
                 </div>
             ) : (
                 <p className="text-gray-600">No reviews available for this room.</p>
+            )}
+
+            {showSuccessAlert && (
+                <SweetAlert success title="Room Booked Successfully" onConfirm={() => setShowSuccessAlert(false)}>
+                    Your room has been successfully booked. Thank you!
+                </SweetAlert>
             )}
         </div>
 
