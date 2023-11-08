@@ -7,6 +7,7 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import RoomDetails from "../pages/RoomDetails/RoomDetails";
+import AboutUs from "../pages/AboutUs/AboutUs";
 
 const router = createBrowserRouter([
     {
@@ -23,7 +24,8 @@ const router = createBrowserRouter([
         },
         {
             path: '/bookings',
-            element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>
+            element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>,
+            // loader: ({params})=> fetch(`https://innsight-server.vercel.app/bookings/${params.id}`)
         },
         {
           path: '/login',
@@ -34,9 +36,13 @@ const router = createBrowserRouter([
           element: <SignUp></SignUp>
         },
         {
+          path:'/aboutUs',
+          element: <AboutUs></AboutUs>
+        },
+        {
           path: '/roomDetails/:id',
           element: <RoomDetails></RoomDetails>,
-          loader: ({params})=> fetch(`http://localhost:5000/rooms/${params.id}`)
+          loader: ({params})=> fetch(`https://innsight-server.vercel.app/rooms/${params.id}`)
         }
       ]
     },

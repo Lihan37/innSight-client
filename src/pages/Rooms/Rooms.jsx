@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import Room from './Room';
 import { Helmet } from 'react-helmet';
 
@@ -7,7 +7,7 @@ const Rooms = () => {
   const [sortOrder, setSortOrder] = useState('default');
 
   useEffect(() => {
-    fetch('http://localhost:5000/rooms')
+    fetch('https://innsight-server.vercel.app/rooms')
       .then((res) => res.json())
       .then((data) => setRooms(data));
   }, []);

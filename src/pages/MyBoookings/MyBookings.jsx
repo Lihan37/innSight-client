@@ -1,23 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import BookingRow from './BookingRow';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-
 import { Helmet } from 'react-helmet';
 
 const MyBookings = () => {
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
+    
+      
+      
 
-    const url = `http://localhost:5000/bookings?email=${user?.email}`;
 
+    const url = `https://innsight-server.vercel.app/bookings?email=${user?.email}`;
+
+
+//    const handleReviewClick =()=>{
+
+//    } 
+
+    
     useEffect(() => {
 
-        axios.get(url, {withCredentials: true})
-        .then(res=>{
-            setBookings(res.data);
-        })
+        axios.get(url, { withCredentials: true })
+            .then(res => {
+                setBookings(res.data);
+            })
         // fetch(url)
         //     .then((res) => res.json())
         //     .then((data) => {
@@ -25,8 +34,8 @@ const MyBookings = () => {
         //     });
     }, [url]);
 
-    const pageTitle = 'My Bookings'; // Customize the title as needed
-    const pageDescription = 'View and manage your bookings'; 
+    const pageTitle = 'My Bookings';
+    const pageDescription = 'View and manage your bookings';
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -38,7 +47,7 @@ const MyBookings = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/bookings/${id}`, {
+                fetch(`https://innsight-server.vercel.app/bookings/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -60,7 +69,7 @@ const MyBookings = () => {
     };
 
     const handleConfirm = id => {
-        fetch(`http://localhost:5000/bookings/${id}`)
+        fetch(`https://innsight-server.vercel.app/bookings/${id}`)
         Swal.fire({
             title: 'Are you sure?',
             icon: 'warning',
@@ -70,12 +79,12 @@ const MyBookings = () => {
             confirmButtonText: 'Yes, update it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/bookings/${id}`, {
+                fetch(`https://innsight-server.vercel.app/bookings/${id}`, {
                     method: 'PATCH',
                     headers: {
                         'content-type': 'application/json'
                     },
-                    body: JSON.stringify({status : 'confirm'})
+                    body: JSON.stringify({ status: 'confirm' })
                 })
                     .then(res => res.json())
                     .then(data => {
@@ -129,10 +138,13 @@ const MyBookings = () => {
                                 booking={booking}
                                 handleDelete={handleDelete}
                                 handleConfirm={handleConfirm}
+                                // handleReview={handleReviewClick}
                             />
                         ))}
+
                     </tbody>
                 </table>
+                
             </div>
         </div>
     );

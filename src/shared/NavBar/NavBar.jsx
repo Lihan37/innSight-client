@@ -48,6 +48,14 @@ const NavBar = () => {
               Sign Up
             </Link>
           </li>
+          <li>
+            <Link
+              to='/aboutUs'
+              className={`hover:text-white ${location.pathname === '/aboutUs' ? 'bg-active' : ''}`}
+            >
+              About Us
+            </Link>
+          </li>
         </>
       );
       
@@ -58,7 +66,7 @@ const NavBar = () => {
         <title>InnSight</title>
         <meta name="description" content="Your website description" />
         <meta name="keywords" content="your, keywords, here" />
-        {/* Add more meta tags as needed */}
+        
       </Helmet>
             <div className="navbar-start">
                 <div className="dropdown">

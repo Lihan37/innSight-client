@@ -11,15 +11,25 @@ const RoomDetails = () => {
 
     const [availability, setAvailability] = useState(null);
 
+    // const [roomReviews, setRoomReviews] = useState([]);
+
+    // useEffect(() => {
+        
+    //     fetch(`https://innsight-server.vercel.app/reviews?roomId=${_id}`)
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             setRoomReviews(data);
+    //         });
+    // }, [_id]);
 
     useEffect(() => {
-        // Fetch the initial availability data from the backend here
-        fetch(`http://localhost:5000/rooms/${_id}`)
+
+        fetch(`https://innsight-server.vercel.app/rooms/${_id}`)
             .then((res) => res.json())
             .then((data) => {
                 setAvailability(data.availability);
             });
-    }, []);
+    }, [_id]);
     const roomDetail = useLoaderData();
     const {
         _id,
@@ -35,6 +45,7 @@ const RoomDetails = () => {
         reviews,
     } = roomDetail;
 
+
     const { user } = useContext(AuthContext);
 
     const [selectedDate, setSelectedDate] = useState(null);
@@ -45,50 +56,48 @@ const RoomDetails = () => {
 
     const handleBookNow = (event) => {
         event.preventDefault();
+
         const form = event.target;
         const name = form.name.value;
         const date = form.date.value;
         const email = user?.email;
-    
-        if (availability !== null) {
-            if (availability > 0) {
-                const booking = {
-                    customerName: name,
-                    email,
-                    date,
-                    image: image,
-                    service: roomType,
-                    service_id: _id,
-                    price: price,
-                };
-    
-                fetch("http://localhost:5000/bookings", {
-                    method: "POST",
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                    body: JSON.stringify(booking),
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        console.log(data);
-                        if (data.insertedId) {
-                            
-                            setAvailability(availability - 1);
-    
-                            
-                            setShowSuccessAlert(true);
-                        }
-                    });
-            } else {
-                alert("This date is fully booked. Please choose another date.");
-            }
+
+        if (availability > 0) {
+            const booking = {
+                customerName: name,
+                email,
+                date,
+                image: image,
+                service: roomType,
+                service_id: _id,
+                price: price,
+            };
+
+            console.log(booking);
+
+            fetch("https://innsight-server.vercel.app/bookings", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(booking),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.insertedId) {
+                        
+                        setAvailability(availability - 1);
+
+                        
+                        setShowSuccessAlert(true);
+                    }
+                });
         } else {
-                
-            alert("Availability data is not available. Please try again later.");
+            
+            alert("This date is fully booked. Please choose another date.");
         }
     };
-    
 
     return (
         <div className="mx-auto p-6 sm:p-12 lg:p-16 rounded-lg shadow-md">
@@ -120,12 +129,13 @@ const RoomDetails = () => {
                             </label>
                             <input
                                 type="text"
-                                defaultValue={user?.displayName}
+                                defaultValue={user?.displayName || ''}
                                 name="name"
                                 placeholder="Name"
                                 className="input input-bordered"
                                 required
                             />
+
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -187,13 +197,13 @@ const RoomDetails = () => {
             ) : (
                 <p className="text-gray-600">No special offers available for this room.</p>
             )}
-            {reviews.length > 0 ? (
+            {/* {roomReviews.length > 0 ? (
                 <div className="mb-4">
                     <h3 className="text-2xl font-bold text-blue-500 mb-2">Reviews</h3>
                     <ul className="space-y-2">
-                        {reviews.map((review, index) => (
+                        {roomReviews.map((review, index) => (
                             <li key={index} className="text-gray-600">
-                                <p className="font-semibold">{review.user}</p>
+                                <p className="font-semibold">{review.username}</p>
                                 <p>Rating: {review.rating}</p>
                                 <p>{review.comment}</p>
                             </li>
@@ -202,7 +212,7 @@ const RoomDetails = () => {
                 </div>
             ) : (
                 <p className="text-gray-600">No reviews available for this room.</p>
-            )}
+            )} */}
 
             {showSuccessAlert && (
                 <SweetAlert success title="Room Booked Successfully" onConfirm={() => setShowSuccessAlert(false)}>

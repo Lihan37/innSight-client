@@ -29,7 +29,7 @@ const Login = () => {
                 console.log('Login successful', loggedInUser);
                 const user = { email };
                 // navigate(location?.state ? location.state : '/');
-                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                axios.post('https://innsight-server.vercel.app/jwt', user, { withCredentials: true })
                     .then(res => {
                         console.log(res.data);
                         if (res.data.success) {
@@ -52,7 +52,7 @@ const Login = () => {
                 console.log('Google Sign-In successful', loggedInUser);
                 const user = { email: loggedInUser.email };
 
-                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                axios.post('https://innsight-server.vercel.app/jwt', user, { withCredentials: true })
                     .then((res) => {
                         console.log(res.data);
                         if (res.data.success) {
