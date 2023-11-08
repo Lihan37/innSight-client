@@ -4,6 +4,8 @@ import BookingRow from './BookingRow';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
+import { Helmet } from 'react-helmet';
+
 const MyBookings = () => {
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
@@ -22,6 +24,9 @@ const MyBookings = () => {
         //         setBookings(data);
         //     });
     }, [url]);
+
+    const pageTitle = 'My Bookings'; // Customize the title as needed
+    const pageDescription = 'View and manage your bookings'; 
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -95,7 +100,11 @@ const MyBookings = () => {
 
     return (
         <div>
-            <h2 className='text-yellow-200 italic mt-10 text-center text-4xl'>My Bookings</h2>
+            <Helmet>
+                <title>{pageTitle}</title>
+                <meta name="description" content={pageDescription} />
+            </Helmet>
+            <h2 className='text-yellow-200 italic mt-10 text-center text-4xl'>{pageTitle}</h2>
             <div className="overflow-x-auto m-10">
                 <table className="table bg-gradient-to-r from-gray-500 to-indigo-600">
                     {/* head */}
@@ -129,4 +138,4 @@ const MyBookings = () => {
     );
 };
 
-export default MyBookings; // Keep this export statement at the top level
+export default MyBookings; 

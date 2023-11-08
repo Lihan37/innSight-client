@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import '../NavBar/navbar.css'
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { Helmet } from 'react-helmet';
 
 const NavBar = () => {
 
@@ -53,6 +54,12 @@ const NavBar = () => {
 
     return (
         <div className="navbar bg-gradient-to-r from-purple-950 to-blue-950 p-10 ">
+           <Helmet>
+        <title>InnSight</title>
+        <meta name="description" content="Your website description" />
+        <meta name="keywords" content="your, keywords, here" />
+        {/* Add more meta tags as needed */}
+      </Helmet>
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost text-gray-300 lg:hidden">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Room from './Room';
+import { Helmet } from 'react-helmet';
 
 const Rooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -29,6 +30,10 @@ const Rooms = () => {
 
   return (
     <div className="mt-10">
+      <Helmet>
+        <title>Discover Luxurious Rooms - InnSight</title>
+        
+      </Helmet>
       <div className="px-20 w-3/4 mx-auto">
         <h1 className="text-4xl font-bold mb-4 text-center text-yellow-200">
           Discover Our Luxurious Rooms
