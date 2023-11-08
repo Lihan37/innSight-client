@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,6 +9,17 @@ const RoomDetails = () => {
 
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
+    const [availability, setAvailability] = useState(null);
+
+
+    useEffect(() => {
+        // Fetch the initial availability data from the backend here
+        fetch(`http://localhost:5000/rooms/${_id}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setAvailability(data.availability);
+            });
+    }, []);
     const roomDetail = useLoaderData();
     const {
         _id,
@@ -18,7 +29,7 @@ const RoomDetails = () => {
         description,
         pricePerNight,
         roomSize,
-        availability,
+        // availability,
         images,
         specialOffers,
         reviews,
@@ -34,39 +45,50 @@ const RoomDetails = () => {
 
     const handleBookNow = (event) => {
         event.preventDefault();
-
         const form = event.target;
         const name = form.name.value;
         const date = form.date.value;
         const email = user?.email;
-
-        const booking = {
-            customerName: name,
-            email,
-            date,
-            image: image,
-            service: roomType,
-            service_id: _id,
-            price: price
+    
+        if (availability !== null) {
+            if (availability > 0) {
+                const booking = {
+                    customerName: name,
+                    email,
+                    date,
+                    image: image,
+                    service: roomType,
+                    service_id: _id,
+                    price: price,
+                };
+    
+                fetch("http://localhost:5000/bookings", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify(booking),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        if (data.insertedId) {
+                            
+                            setAvailability(availability - 1);
+    
+                            
+                            setShowSuccessAlert(true);
+                        }
+                    });
+            } else {
+                alert("This date is fully booked. Please choose another date.");
+            }
+        } else {
+                
+            alert("Availability data is not available. Please try again later.");
         }
-
-        console.log(booking);
-
-        fetch('http://localhost:5000/bookings', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(booking)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.insertedId) {
-                    setShowSuccessAlert(true);
-                }
-            })
-    }
+    };
+    
 
     return (
         <div className="mx-auto p-6 sm:p-12 lg:p-16 rounded-lg shadow-md">

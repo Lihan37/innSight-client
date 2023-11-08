@@ -1,9 +1,9 @@
 import SweetAlert from "react-bootstrap-sweetalert";
 
 
-const BookingRow = ({ booking, handleDelete }) => {
+const BookingRow = ({ booking, handleDelete, handleConfirm }) => {
 
-    const { _id, customerName, email, date, service, price, image } = booking;
+    const { _id, customerName, email, date, service, price, image, status } = booking;
 
     
 
@@ -35,7 +35,8 @@ const BookingRow = ({ booking, handleDelete }) => {
             <td>${price}</td>
             <td>{date}</td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                {status === 'confirm' ? <span className="font-bold text-green-500">Updated</span>:
+                    <button onClick={()=>handleConfirm(_id)} className="btn btn-ghost btn-xs">Confirm</button>}
             </th>
         </tr>
     );
