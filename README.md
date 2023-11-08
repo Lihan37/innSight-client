@@ -1,8 +1,28 @@
-# React + Vite
+[Your Project Name] - Client-Side
+Welcome to the client-side of [Your Project Name]! This project is a part of our web application, which helps you discover and book your ideal hotel room with ease.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔗 Live Link: Inn-Sight Client
 
-Currently, two official plugins are available:
+About [Your Project Name]
+[Your Project Name] is a web application dedicated to providing a seamless and user-friendly experience for travelers looking to book their stay at [Your Hotel Name]. Here are the key highlights:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Easy Hotel Room Booking: Our platform offers a simple and intuitive interface for users to search, view, and book hotel rooms with just a few clicks. Find your ideal room quickly and conveniently.
+
+Detailed Room Information: Each room listing includes essential details, high-quality images, pricing, and availability information to help you make an informed decision.
+
+Personalized Experience: Users can create an account and enjoy personalized features such as saving favorite rooms, managing bookings, and receiving special offers and updates.
+
+User Authentication: We prioritize the security and privacy of our users. We've implemented user authentication to safeguard your personal information and bookings.
+
+About Us: Get to know more about our hotel and its features by visiting the "About Us" section, where you'll find information about our hotel's location, amenities, and commitment to guest satisfaction.
+
+Technologies Used
+React: The frontend is built using React, a popular JavaScript library for building user interfaces.
+
+React Router: We use React Router to manage client-side routing, making navigation within the app smooth and dynamic.
+
+Firebase: Firebase powers our user authentication, database, and hosting for a secure and reliable experience.
+
+Tailwind CSS: We've utilized Tailwind CSS for styling to achieve a clean, modern, and responsive design.
+
+Axios: Axios is used for making HTTP requests to fetch and update data from our server.
