@@ -4,6 +4,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaGoogle } from "react-icons/fa";
+import axios from "axios";
 
 
 const Login = () => {
@@ -20,31 +21,57 @@ const Login = () => {
 
         setLoginError('');
 
-        try {
-            await signIn(email, password);
-            console.log('Login successful');
-            navigate(location?.state ? location.state : '/');
-        } catch (error) {
-            console.error('Login error:', error.message);
-            setLoginError(error.message);
-            toast.error(error.message);
-        }
+        signIn(email, password)
+            .then(result => {
+
+                const loggedInUser = result.user;
+
+                console.log('Login successful', loggedInUser);
+                const user = { email };
+                // navigate(location?.state ? location.state : '/');
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.success) {
+                            navigate(location?.state ? location.state : '/');
+                        }
+                    })
+            })
+            .catch((error) => {
+                console.error('Login error:', error.message);
+                setLoginError(error.message);
+                toast.error(error.message);
+            });
+
     }
 
-    const handleSignInWithGoogle =()=>{
+    const handleSignInWithGoogle = () => {
         signInWithGoogle()
-        .then(result => {
-            console.log(result);
-            navigate(location?.state ? location.state : '/');
-        })
-        .catch(error=>{
-            console.error(error);
-        })
+            .then((result) => {
+                const loggedInUser = result.user;
+                console.log('Google Sign-In successful', loggedInUser);
+                const user = { email: loggedInUser.email };
+
+                axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+                    .then((res) => {
+                        console.log(res.data);
+                        if (res.data.success) {
+                            navigate(location?.state ? location.state : '/');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error while sending user data to the server:', error.message);
+                    });
+            })
+            .catch((error) => {
+                console.error('Google Sign-In error:', error.message);
+            });
     }
+
 
     return (
         <div>
-            
+
 
             <form onSubmit={handelLogin}>
 
@@ -77,7 +104,7 @@ const Login = () => {
                             </div>
                             {loginError && <p className="text-red-500">{loginError}</p>}
 
-                        
+
                             <p>Please <Link to='/signUp' className="text-blue-700">Sign Up</Link> here</p>
 
                             <p>Or you can login using google!!</p>
