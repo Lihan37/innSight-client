@@ -1,10 +1,10 @@
-[Your Project Name] - Client-Side
-Welcome to the client-side of [Your Project Name]! This project is a part of our web application, which helps you discover and book your ideal hotel room with ease.
+InnSight - Client-Side
+Welcome to the client-side of InnSight! This project is a part of our web application, which helps you discover and book your ideal hotel room with ease.
 
-🔗 Live Link: Inn-Sight Client
+🔗 Live Link: [Inn-Sight Client](https://inn-sight.web.app/)
 
-About [Your Project Name]
-[Your Project Name] is a web application dedicated to providing a seamless and user-friendly experience for travelers looking to book their stay at [Your Hotel Name]. Here are the key highlights:
+About InnSight
+This is a web application dedicated to providing a seamless and user-friendly experience for travelers looking to book their stay at [Your Hotel Name]. Here are the key highlights:
 
 Easy Hotel Room Booking: Our platform offers a simple and intuitive interface for users to search, view, and book hotel rooms with just a few clicks. Find your ideal room quickly and conveniently.
 
